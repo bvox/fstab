@@ -2,6 +2,8 @@
 
 require 'rubygems'
 require 'bundler'
+require './lib/fstab.rb'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -14,33 +16,21 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.version = Fstab::VERSION
   gem.name = "fstab"
-  gem.homepage = "http://github.com/rubiojr/fstab"
+  gem.homepage = "http://github.com/bvox/fstab"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "rubiojr@frameos.org"
+  gem.summary = %Q{Linux fstab helper library}
+  gem.description = %Q{Linux fstab helper library}
+  gem.email = "rubiojr@bvox.net"
   gem.authors = ["Sergio Rubio"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
-
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
-
-task :default => :test
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
+task :default => :spec
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
