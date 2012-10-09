@@ -105,6 +105,7 @@ describe Fstab do
         devs.first.last[:invalid].should == true
         f.puts 'weird_entry foo bar'
         f.flush
+        fstab.reload
         devs = fstab.parse
         devs.count.should == 2
         devs.each do |k,v|

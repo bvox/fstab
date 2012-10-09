@@ -77,6 +77,7 @@ class Fstab
       f.puts @contents
       f.puts format_entry(dev, opts)
     end
+    reload
   end
 
   def add_fs(dev, mpoint, type, opts, dump = 0, pass = 0)
@@ -94,8 +95,11 @@ class Fstab
     @lcount
   end
 
-  def parse(reload = true)
-    @contents = File.read @file if reload
+  def reload
+    @contents = File.read @file
+  end
+
+  def parse
     raise Exception.new("/sbin/blkid not found") unless File.exist?('/sbin/blkid')
     fslist = {}
     ucount = 0
@@ -185,6 +189,7 @@ class Fstab
         f.puts format_entry(k, v)
       end
     end
+    reload
     true
   end
 
