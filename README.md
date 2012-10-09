@@ -20,10 +20,10 @@ Adding a new entry to fstab:
     # Asuming /dev/sda1 has a valid FS
     # The library will use the FS UUID automatically by default even if the block device path
     # was used as an argument. This is usually safer.
-    fstab.add_device '/dev/sda1', '/mnt', 'ext4', 'discard,errors=remount-ro', 0, 1
+    fstab.add_fs '/dev/sda1', '/mnt', 'ext4', 'discard,errors=remount-ro', 0, 1
 
     # You can use filesystem UUID also
-    fstab.add_device '15baeabd-b419-4a69-a306-bc550dc8355f', '/mnt', 'ext4', 'discard,errors=remount-ro', 0, 1
+    fstab.add_fs '15baeabd-b419-4a69-a306-bc550dc8355f', '/mnt', 'ext4', 'discard,errors=remount-ro', 0, 1
 
     # List fstab entries
     fstab.entries.each do |key, val|
