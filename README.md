@@ -2,6 +2,10 @@
 
 Linux fstab helper library
 
+**WARNING**
+
+Experimental code, will eat your fstab at some point.
+
 # Usage
 
 Adding a new entry to fstab:
