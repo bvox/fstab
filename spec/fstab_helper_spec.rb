@@ -112,6 +112,15 @@ describe Fstab do
         end
       end
     end
+    
+    it "should parse valid UUID entries" do
+      pdev, uuid, label, type = get_first_blkid
+      File.open @fake_fstab, 'w+' do |f|
+        f.puts  "UUID=74bc785f-1024-4779-80a1-7a1e0619ad26 /srv/node/74bc785f-1024-4779-80a1-7a1e0619ad26 xfs noatime,nodiratime,nobarrier,logbufs=8 0 0"
+      end
+      fstab = Fstab.new @fake_fstab
+      fstab.parse.count.should == 1
+    end
   end
 
   describe "#add_fs" do

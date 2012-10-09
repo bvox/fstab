@@ -122,7 +122,7 @@ class Fstab
         # by UUID
         uuid = fs.split("=").last.strip.chomp
         pdev = "/dev/" + File.readlink("/dev/disk/by-uuid/#{uuid}").split("/").last rescue "unknown_#{ucount}"
-        label = Fstab.get_label pdev
+        label = Fstab.get_label pdev rescue nil
       elsif l =~ /^\s*\/dev/
         # by dev path
         pdev = fs
@@ -222,7 +222,7 @@ class Fstab
   # All the attributes except dev may be nil at any given time since
   # device may not have a valid filesystem or label.
   def self.get_blkdev_fs_attrs(dev)
-    raise ArgumentError.new("Invalid device path") unless File.blockdev?(dev)
+    raise ArgumentError.new("Invalid device path #{dev}") unless File.blockdev?(dev)
     blkid = `/sbin/blkid #{dev}`
     attrs = {}
     attrs[:uuid] = blkid.match(/UUID="(.*?)"/)[1] rescue nil
