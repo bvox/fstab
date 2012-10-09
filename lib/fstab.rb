@@ -1,6 +1,6 @@
 class Fstab
 
-  VERSION = "0.1"
+  VERSION = "0.1.1"
 
   # if safe_mode true, non existing devices won't be added to fstab.
   # Adding a non existing device to fstab will raise an exception.
